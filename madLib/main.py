@@ -1,0 +1,10 @@
+#Samuel Andelin, Madlib
+noun1 = input("Input a noun: ")
+noun2 = input("Input a noun: ")
+noun3 = input("Input a noun: ")
+verb1 = input("Input a verb: ")
+verb2 = input("Input a verb: ")
+name = input("Input a name: ")
+num = input("Input a number: ")
+adj1 = input("Input an adjective: ")
+print("Once upon a time, there was a guy named "+name+". He loved to collect "+noun1+"s and he already had "+num+" of them. One day, "+name+" was "+verb1+"ing around the neighborhood when suddenly a "+adj1+" "+noun2+" jumped in front of him. The "+noun2+" asked for some "+noun3+"s. "+name+" didn't have any, so he hurriedly "+verb2+"ed away.")
