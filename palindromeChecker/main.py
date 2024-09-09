@@ -1,5 +1,6 @@
 #Samuel Andelin, Palindrome
 palindrome = input("Enter a string to check if it is a palindrome: ")
+palindrome = palindrome.lower()
 list = []
 for i in palindrome:
     list.append(i)
