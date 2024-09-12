@@ -1,3 +1,4 @@
+#Samuel Andelin, Raid for "What's in a Name?"
 def calculate_area(height, width):
     area = width * height
     return area
