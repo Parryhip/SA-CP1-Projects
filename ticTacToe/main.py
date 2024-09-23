@@ -64,61 +64,62 @@ def display():
     print(row2toprint)
     print(row3toprint)
 def plyrturn():
-    userrow = input("Which row do you want to play in(1/2/3)?: ")
-    if spottaken(userrow, usercolumn) == False:
-        if userrow == 1:
-            usercolumn = input("Which column do you want to play in?(1/2/3): ")
-            if usercolumn == 1:
-                print("Ok!")
-                row1.pop(0)
-                row1.insert(0, "X")
-                display()
-            if usercolumn == 2:
-                print("Ok!")
-                row1.pop(1)
-                row1.insert(1, "X")
-                display()
-            if usercolumn == 3:
-                print("Ok!")
-                row1.pop(2)
-                row1.insert(2, "X")
-                display()
-        if userrow == 2:
-            usercolumn = input("Which column do you want to play in?(1/2/3): ")
-            if usercolumn == 1:
-                print("Ok!")
-                row2.pop(0)
-                row2.insert(0, "X")
-                display()
-            if usercolumn == 2:
-                print("Ok!")
-                row2.pop(1)
-                row2.insert(1, "X")
-                display()
-            if usercolumn == 3:
-                print("Ok!")
-                row2.pop(2)
-                row2.insert(2, "X")
-                display()
-        if userrow == 3:
-            usercolumn = input("Which column do you want to play in?(1/2/3): ")
-            if usercolumn == 1:
-                print("Ok!")
-                row3.pop(0)
-                row3.insert(0, "X")
-                display()
-            if usercolumn == 2:
-                print("Ok!")
-                row3.pop(1)
-                row3.insert(1, "X")
-                display()
-            if usercolumn == 3:
-                print("Ok!")
-                row3.pop(2)
-                row3.insert(2, "X")
-                display()
-    else:
-        print("Spot is taken. Please try again.")
+    while spottaken(userrow, usercolumn) == True:
+        userrow = input("Which row do you want to play in(1/2/3)?: ")
+        if spottaken(userrow, usercolumn) == False:
+            if userrow == 1:
+                usercolumn = input("Which column do you want to play in?(1/2/3): ")
+                if usercolumn == 1:
+                    print("Ok!")
+                    row1.pop(0)
+                    row1.insert(0, "X")
+                    display()
+                if usercolumn == 2:
+                    print("Ok!")
+                    row1.pop(1)
+                    row1.insert(1, "X")
+                    display()
+                if usercolumn == 3:
+                    print("Ok!")
+                    row1.pop(2)
+                    row1.insert(2, "X")
+                    display()
+            if userrow == 2:
+                usercolumn = input("Which column do you want to play in?(1/2/3): ")
+                if usercolumn == 1:
+                    print("Ok!")
+                    row2.pop(0)
+                    row2.insert(0, "X")
+                    display()
+                if usercolumn == 2:
+                    print("Ok!")
+                    row2.pop(1)
+                    row2.insert(1, "X")
+                    display()
+                if usercolumn == 3:
+                    print("Ok!")
+                    row2.pop(2)
+                    row2.insert(2, "X")
+                    display()
+            if userrow == 3:
+                usercolumn = input("Which column do you want to play in?(1/2/3): ")
+                if usercolumn == 1:
+                    print("Ok!")
+                    row3.pop(0)
+                    row3.insert(0, "X")
+                    display()
+                if usercolumn == 2:
+                    print("Ok!")
+                    row3.pop(1)
+                    row3.insert(1, "X")
+                    display()
+                if usercolumn == 3:
+                    print("Ok!")
+                    row3.pop(2)
+                    row3.insert(2, "X")
+                    display()
+        else:
+            print("Spot is taken. Please try again.")
 def compturn():
     comprow = random.randint(1,3)
     compcolumn = random.randint(1,3)
