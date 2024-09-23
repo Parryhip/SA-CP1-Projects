@@ -54,7 +54,9 @@ def shift(word):
             newword.append("z")
         elif i == "z":
             newword.append("a")
+        elif i == " ":
+            newword.append(" ")
     newwordstr = "".join(newword)
     return newwordstr
-wordtochange = input("Choose a word to be coded(all lowercase): ")
+wordtochange = input("Choose a message to be coded(all lowercase): ")
 print(shift(wordtochange))
