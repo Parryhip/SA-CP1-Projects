@@ -59,4 +59,5 @@ def shift(word):
     newwordstr = "".join(newword)
     return newwordstr
 wordtochange = input("Choose a message to be coded(all lowercase): ")
-print(shift(wordtochange))
+print("Original word: " + wordtochange) 
+print("New word: " + shift(wordtochange))
