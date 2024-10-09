@@ -11,11 +11,19 @@ userguessedit = False
 while userguessedit == False:
     #user prompt for number
     userguess = input("What is your guess for the number?: ")
+    #changing the user's input into an integer for easier checking
     userguessint = int(userguess)
+    #if the user's guess is too high
     if userguessint < numtoguess:
+        #print that the user's guess is too high
         print("Too low.")
+    #if the user's guess is too low
     elif userguessint > numtoguess:
+        #print that the user's guess is too low
         print("Too high.")
+    #if the user's guess is correct(it is the same as the random number)
     elif userguessint == numtoguess:
+        #print that the user won / guessed the number
         print("You guessed the number!")
+        #sets that the user has guessed the number
         userguessedit = True
