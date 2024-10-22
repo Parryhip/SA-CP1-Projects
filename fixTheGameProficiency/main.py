@@ -8,17 +8,17 @@ def start_game():
     attempts = 0
     game_over = False
     while not game_over:
-        guess = input("Enter your guess: ")
+        guess = int(input("Enter your guess: "))#The bug was that the computer can't compare integers and strings. This is a runtime error. If the computer can't compare strings and integers, then it won't know if you are too high, too low, or right.
         if attempts >= max_attempts:
             print(f"Sorry, you've used all {max_attempts} attempts. The number was {number_to_guess}.")
             game_over = True
-        if int(guess) == number_to_guess: #The bug was that the computer can't compare integers and strings. This is a runtime error. If the computer can't compare strings and integers, then it won't know if you are too high, too low, or right.
+        if guess == number_to_guess: 
             print("Congratulations! You've guessed the number!")
             game_over = True
-        elif int(guess) > number_to_guess: #The bug was that the computer can't compare integers and strings. This is a runtime error. If the computer can't compare strings and integers, then it won't know if you are too high, too low, or right.
+        elif guess > number_to_guess: 
             print("Too high! Try again.")
             attempts += 1 #The bug was that the computer didn't know when the user's attempts ran out. This is a logic error. If the computer doesn't know if the user has used up all of their attempts, then the user can just spam random numbers with no consequence of losing.
-        elif int(guess) < number_to_guess: #The bug was that the computer can't compare integers and strings. This is a runtime error. If the computer can't compare strings and integers, then it won't know if you are too high, too low, or right.
+        elif guess < number_to_guess: 
             print("Too low! Try again.")  
             attempts += 1 #Needed to increase the attempts variable to actually control the attempts
         continue
