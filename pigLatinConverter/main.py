@@ -8,14 +8,16 @@ def switch(word):
         wordlist = []
         for i in word:
             wordlist.append(i)
-        while wordlist[0] != "a" or wordlist[0] != "e" or wordlist[0] != "i" or wordlist[0] != "o" or wordlist[0] != "u":
-            wordlist.append(word[0])
-            del wordlist[0]
-            newword.append(word)
-            newword.append("ay")
+        while True:
+            if  wordlist[0] != "a" and wordlist[0] != "e" and wordlist[0] != "i" and wordlist[0] != "o" and wordlist[0] != "u":
+                wordlist.append(wordlist[0])
+                del wordlist[0]
+            else:
+                newword.append("".join(wordlist))
+                newword.append("ay")
+                break
     return newword
 wordtochange = input("What word should I switch to piglatin?")
 newword = switch(wordtochange)
-print(newword)
 newwordtostring = "".join(newword)
 print(newwordtostring)
