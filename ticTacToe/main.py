@@ -7,7 +7,6 @@ play_again = "y"
 def spottaken(row, column):
     if row == 1:
         if column == 1:
-            print("HI")
             if row1[0] == "X":
                 return True
             elif row1[0] == "O":
@@ -57,27 +56,26 @@ def spottaken(row, column):
     else:
         return False
 def display():
-    row1toprint = " | ".join(row1)
-    row2toprint = " | ".join(row2)
-    row3toprint = " | ".join(row3)
     print("The board now looks like this: ")
-    print(row1toprint)
-    print("- - -")
-    print(row2toprint)
-    print("- - -")
-    print(row3toprint)
+    lists = [row1, row2, row3]
+    for list in lists:
+        for i in range(len(list)):
+            print(list[i], end="")
+            print(" | ", end="")
+            if i == 2 or i == 5:
+                print("\n")
 def plyrturn():
     while True:
         userrow = int(input("Which row do you want to play in(1/2/3)?: "))
         usercolumn = int(input("Which column do you want to play in?(1/2/3): "))
         if spottaken(int(userrow), int(usercolumn)) != True:
-            print("Hi")
             if userrow == 1:
                 if usercolumn == 1:
                     print("Ok!")
                     row1.pop(0)
                     row1.insert(0, "X")
                     display()
+
                     break
                 elif usercolumn == 2:
                     print("Ok!")
@@ -134,45 +132,46 @@ def plyrturn():
 def compturn():
     comprow = random.randint(1,3)
     compcolumn = random.randint(1,3)
-    if comprow == 1:
-        if compcolumn == 1:
-            row1.pop(0)
-            row1.insert(0, "O")
-            display()
-        if compcolumn == 2:
-            row1.pop(1)
-            row1.insert(1, "O")
-            display()
-        if compcolumn == 3:
-            row1.pop(2)
-            row1.insert(2, "O")
-            display()
-    if comprow == 2:
-        if compcolumn == 1:
-            row2.pop(0)
-            row2.insert(0, "O")
-            display()
-        if compcolumn == 2:
-            row2.pop(1)
-            row2.insert(1, "O")
-            display()
-        if compcolumn == 3:
-            row2.pop(2)
-            row2.insert(2, "O")
-            display()
-    if comprow == 3:
-        if compcolumn == 1:
-            row3.pop(0)
-            row3.insert(0, "O")
-            display()
-        if compcolumn == 2:
-            row3.pop(1)
-            row3.insert(1, "O")
-            display()
-        if compcolumn == 3:
-            row3.pop(2)
-            row3.insert(2, "O")
-            display()
+    if spottaken(int(comprow), int(compcolumn)) != True:
+        if comprow == 1:
+            if compcolumn == 1:
+                row1.pop(0)
+                row1.insert(0, "O")
+                display()
+            if compcolumn == 2:
+                row1.pop(1)
+                row1.insert(1, "O")
+                display()
+            if compcolumn == 3:
+                row1.pop(2)
+                row1.insert(2, "O")
+                display()
+        if comprow == 2:
+            if compcolumn == 1:
+                row2.pop(0)
+                row2.insert(0, "O")
+                display()
+            if compcolumn == 2:
+                row2.pop(1)
+                row2.insert(1, "O")
+                display()
+            if compcolumn == 3:
+                row2.pop(2)
+                row2.insert(2, "O")
+                display()
+        if comprow == 3:
+            if compcolumn == 1:
+                row3.pop(0)
+                row3.insert(0, "O")
+                display()
+            if compcolumn == 2:
+                row3.pop(1)
+                row3.insert(1, "O")
+                display()
+            if compcolumn == 3:
+                row3.pop(2)
+                row3.insert(2, "O")
+                display()
 def game():
     while True:
         plyrturn()
