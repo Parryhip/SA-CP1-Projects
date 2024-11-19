@@ -1,15 +1,17 @@
 #Samuel Andelin, Password Validator\
 specialcharacters = ["~", "`", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "[", "]", "{", "}", "\\", "|", ":", ";", "'", '"', "<", ">", ",", ".", "?", "/"]
 numberscount = 0
-passwordvalidated = False
-while passwordvalidated == False:
+specialchar = 0
+while True:
+    numbersinpassword = False
+    passwordlongenough = False
+    specialchar = 0
     newpassword = input("What is your password?")
     for i in specialcharacters:
-        if i not in newpassword:
-            print("No special characters in password!")
-            break
+        if i in newpassword:
+            specialchar += 1
         else:
-            pass
+            continue
     for i in newpassword:
         try:
             test = int(i)
@@ -18,10 +20,26 @@ while passwordvalidated == False:
             continue
     if numberscount == 0:
         print("No numbers in password!")
-        continue
+        numbersinpassword = False
+    else:
+        numbersinpassword = True
     if len(newpassword) < 8:
         print("Password is not long enough!")
+        passwordlongenough = False
+    else:
+        passwordlongenough = True
+    if specialchar == 0:
+        print("No special characters in password.")
         continue
     else:
-        passwordvalidated = True
+        pass
+    if numbersinpassword == False:
+        continue
+    else:
+        pass
+    if passwordlongenough == False:
+        continue
+    else:
+        break
+
 print("Password validated!")
