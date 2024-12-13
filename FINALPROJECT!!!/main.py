@@ -91,7 +91,7 @@ final_boss = {
     'hp' : 100,
     'strength' : 18,
     'speed' : 18,
-    'inventory' : ['fireball', 'healing_potion']
+    'inventory' : ['fireball', 'health potion', 'slow spell']
 }
 def play_again():
     while True:
@@ -106,7 +106,7 @@ def play_again():
             continue
 def plyrturn():
     while True:
-        plyraction = input("What do you want to do? 1 for attack with sword, 2 for cast spell, 3 for use potion, and 4 for run away.")
+        plyraction = input("What do you want to do? 1 for attack with sword, 2 for cast spell, 3 for use potion, 4 for switch weapon, and 5 for run away.")
         if plyraction == "1":
             print("You attack with your sword.")
             time.sleep(0.5)
@@ -166,13 +166,17 @@ def plyrturn():
             print(plyrstats['spellinventory'])
             time.sleep(0.5)
             while True:
-                spelltouse = input("What potion do you want to use?(use the exact name of the item) or type exit to exit the potion menu.")
+                spelltouse = input("What spell do you want to use?(use the exact name of the item) or type exit to exit the spell menu.")
                 if spelltouse in plyrstats['spellinventory']:
                     print("You use your" + spelltouse + ".")
                     if spelltouse == "fireball":
                         fireballspellindex = plyrstats['spellinventory'].index("fireball")
                         plyrstats['spellinventory'].pop(fireballspellindex)
                         normal_enemy['hp'] -= 20
+                        print("You hit the monster for 20.")
+                        time.sleep(0.5)
+                        print("The monster's hp is now "+str(normal_enemy['hp'] +"."))
+                        time.sleep(0.5)
                         if normal_enemy['hp'] <= 0:
                             print("You killed the enemy!")
                             return 'enemydead'
@@ -182,7 +186,46 @@ def plyrturn():
                     elif spelltouse == "slow spell":
                         slowspellspellindex = plyrstats['spellinventory'].index("slow spell")
                         plyrstats['spellinventory'].pop(slowspellspellindex)
-                        normal_enemy['speed'] -= 5
+                        normal_enemy['speed'] -= 10
+                        print("You decrease the monster's speed by 10.")
+                        time.sleep(0.5)
+                        print("The monster's speed is now "+str(normal_enemy['speed'] +"."))
+                        time.sleep(0.5)
+                        return 'enemynotdead'
+                elif spelltouse == "exit":
+                    break
+                else:
+                    print("You do not have that spell!")
+                    time.sleep(0.5)
+        elif plyraction == "4":
+            print("These are the weapons that you have:")
+            print(plyrstats['weaponinventory'])
+            while True:
+                weapontoequip = input("What weapon do you want to equip?(use the exact name of the item) or type exit to exit the weapon menu.")
+                if weapontoequip in plyrstats['weaponinventory']:
+                    print("You equip your" + weapontoequip + ".")
+                    if weapontoequip == "longsword":
+                        fireballspellindex = plyrstats['spellinventory'].index("fireball")
+                        plyrstats['spellinventory'].pop(fireballspellindex)
+                        normal_enemy['hp'] -= 20
+                        print("You hit the monster for 20.")
+                        time.sleep(0.5)
+                        print("The monster's hp is now "+str(normal_enemy['hp'] +"."))
+                        time.sleep(0.5)
+                        if normal_enemy['hp'] <= 0:
+                            print("You killed the enemy!")
+                            return 'enemydead'
+                        else:
+                            print("Enemy's turn!")
+                            return 'enemynotdead'
+                    elif spelltouse == "slow spell":
+                        slowspellspellindex = plyrstats['spellinventory'].index("slow spell")
+                        plyrstats['spellinventory'].pop(slowspellspellindex)
+                        normal_enemy['speed'] -= 10
+                        print("You decrease the monster's speed by 10.")
+                        time.sleep(0.5)
+                        print("The monster's speed is now "+str(normal_enemy['speed'] +"."))
+                        time.sleep(0.5)
                         return 'enemynotdead'
                 elif spelltouse == "exit":
                     break
