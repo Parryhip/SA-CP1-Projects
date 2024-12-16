@@ -80,7 +80,8 @@ plyrstats = {
     'speed' : 13,
     'potioninventory' : [],
     'spellinventory' : [],
-    'weaponinventory' : []
+    'weaponinventory' : [],
+    'weaponcurrentlyequipped' : "dagger",
 }
 normal_enemy = {
     'hp' : 30,
@@ -200,36 +201,47 @@ def plyrturn():
         elif plyraction == "4":
             print("These are the weapons that you have:")
             print(plyrstats['weaponinventory'])
+            time.sleep(0.5)
+            print("The weapon currently equipped is your "+ plyrstats['weaponcurrentlyequipped']+".")
+            time.sleep(0.5)
             while True:
                 weapontoequip = input("What weapon do you want to equip?(use the exact name of the item) or type exit to exit the weapon menu.")
                 if weapontoequip in plyrstats['weaponinventory']:
                     print("You equip your" + weapontoequip + ".")
                     if weapontoequip == "longsword":
-                        fireballspellindex = plyrstats['spellinventory'].index("fireball")
-                        plyrstats['spellinventory'].pop(fireballspellindex)
-                        normal_enemy['hp'] -= 20
-                        print("You hit the monster for 20.")
-                        time.sleep(0.5)
-                        print("The monster's hp is now "+str(normal_enemy['hp'] +"."))
-                        time.sleep(0.5)
-                        if normal_enemy['hp'] <= 0:
-                            print("You killed the enemy!")
-                            return 'enemydead'
-                        else:
-                            print("Enemy's turn!")
-                            return 'enemynotdead'
-                    elif spelltouse == "slow spell":
-                        slowspellspellindex = plyrstats['spellinventory'].index("slow spell")
-                        plyrstats['spellinventory'].pop(slowspellspellindex)
-                        normal_enemy['speed'] -= 10
-                        print("You decrease the monster's speed by 10.")
-                        time.sleep(0.5)
-                        print("The monster's speed is now "+str(normal_enemy['speed'] +"."))
-                        time.sleep(0.5)
-                        return 'enemynotdead'
-                elif spelltouse == "exit":
+                        if plyrstats['weaponcurrentlyequipped'] == "longsword":
+                            plyrstats['strength'] -= 6
+                        elif plyrstats['weaponcurrentlyequipped'] == "shortsword":
+                            plyrstats['strength'] -= 4
+                        elif plyrstats['weaponcurrentlyequipped'] == "dagger":
+                            plyrstats['strength'] -= 2
+                        plyrstats['weaponcurrentlyequipped'] = "longsword"
+                        plyrstats['strength'] += 6
+                    elif weapontoequip == "longsword":
+                        if plyrstats['weaponcurrentlyequipped'] == "longsword":
+                            plyrstats['strength'] -= 6
+                        elif plyrstats['weaponcurrentlyequipped'] == "shortsword":
+                            plyrstats['strength'] -= 4
+                        elif plyrstats['weaponcurrentlyequipped'] == "dagger":
+                            plyrstats['strength'] -= 2
+                        plyrstats['weaponcurrentlyequipped'] = "shortsword"
+                        plyrstats['strength'] += 4
+                    elif weapontoequip == "dagger":
+                        if plyrstats['weaponcurrentlyequipped'] == "longsword":
+                            plyrstats['strength'] -= 6
+                        elif plyrstats['weaponcurrentlyequipped'] == "shortsword":
+                            plyrstats['strength'] -= 4
+                        elif plyrstats['weaponcurrentlyequipped'] == "dagger":
+                            plyrstats['strength'] -= 2
+                        plyrstats['weaponcurrentlyequipped'] = "shortsword"
+                        plyrstats['strength'] += 2
+                elif weapontoequip == "exit":
                     break
                 else:
-                    print("You do not have that spell!")
+                    print("You do not have that weapon!")
                     time.sleep(0.5)
-            
+        elif plyraction == "5":
+            print("You try to run away.")
+            monsterwantstoblock = random.randint(0,1)
+            if monsterwantstoblock == 1:
+                print("")
