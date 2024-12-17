@@ -98,7 +98,7 @@ final_boss = {
 common_chest ={
     'spellinventory' : [],
     'potioninventory' : ['health potion'],
-    'weaponinventory' : []
+    'weaponinventory' : ['dagger']
 }
 rare_chest ={
     'spellinventory' : ['slow spell'],
@@ -141,7 +141,7 @@ def plyrturn():
             print("You hit the monster for "+overall_attack+".")
             normal_enemy['hp'] -= int(overall_attack)
             time.sleep(1)
-            print("The monster's hp is now "+str(normal_enemy['hp'] +"."))
+            print("The monster's hp is now "+str(normal_enemy['hp']) +".")
             time.sleep(1)
             if normal_enemy['hp'] <= 0:
                 print("You killed the enemy!")
@@ -508,15 +508,12 @@ def loot():
     if chest == "common":
         print("The chest in the room is a common chest!")
         time.sleep(1)
-        commonloottype = random.randint(1,3)
+        commonloottype = random.randint(1,2)
         if commonloottype == 1:
-            commonchestitem = random.choose(common_chest['potioninventory'])
+            commonchestitem = random.choice(common_chest['potioninventory'])
             plyrstats['potioninventory'].append(commonchestitem)
         elif commonloottype == 2:
-            commonchestitem = random.choose(common_chest['spellinventory'])
-            plyrstats['spellinventory'].append(commonchestitem)
-        elif commonloottype == 3:
-            commonchestitem = random.choose(common_chest['weaponinventory'])
+            commonchestitem = random.choice(common_chest['weaponinventory'])
             plyrstats['weaponinventory'].append(commonchestitem)
         print("You got a "+commonchestitem+"!")
     elif chest == "rare":
@@ -524,13 +521,13 @@ def loot():
         time.sleep(1)
         rareloottype = random.randint(1,3)
         if rareloottype == 1:
-            rarechestitem = random.choose(rare_chest['potioninventory'])
+            rarechestitem = random.choice(rare_chest['potioninventory'])
             plyrstats['potioninventory'].append(rarechestitem)
         elif rareloottype == 2:
-            rarechestitem = random.choose(rare_chest['spellinventory'])
+            rarechestitem = random.choice(rare_chest['spellinventory'])
             plyrstats['spellinventory'].append(rarechestitem)
         elif rareloottype == 3:
-            rarechestitem = random.choose(rare_chest['weaponinventory'])
+            rarechestitem = random.choice(rare_chest['weaponinventory'])
             plyrstats['weaponinventory'].append(rarechestitem)
         print("You got a "+rarechestitem+"!")
     elif chest == "legendary":
@@ -538,20 +535,20 @@ def loot():
         time.sleep(1)
         legendaryloottype = random.randint(1,3)
         if legendaryloottype == 1:
-            legendarychestitem = random.choose(legendary_chest['potioninventory'])
+            legendarychestitem = random.choice(legendary_chest['potioninventory'])
             plyrstats['potioninventory'].append(legendarychestitem)
         elif legendaryloottype == 2:
-            legendarychestitem = random.choose(legendary_chest['spellinventory'])
+            legendarychestitem = random.choice(legendary_chest['spellinventory'])
             plyrstats['spellinventory'].append(legendarychestitem)
         elif legendaryloottype == 3:
-            legendarychestitem = random.choose(legendary_chest['weaponinventory'])
+            legendarychestitem = random.choice(legendary_chest['weaponinventory'])
             plyrstats['weaponinventory'].append(legendarychestitem)
         print("You got a "+legendarychestitem+"!")
 def combat():
     print("Rolling dice for who goes first in combat...")
     time.sleep(1)
     global current_room
-    if current_room == "room 9":
+    if current_room == "room9":
         finalbossincombat = True
     else:
         finalbossincombat = False
@@ -564,7 +561,7 @@ def combat():
         time.sleep(1)
         final_bossrollforcombat = random.randint(1,20)
         overallrollenemy = final_bossrollforcombat + final_boss['speed']//3
-        print("The final boss rolled a "+str(plyrrollforcombat)+".")
+        print("The final boss rolled a "+str(final_bossrollforcombat)+".")
         time.sleep(1)
         print("With their +"+str(plyrstats['speed']//3)+" means that they got a "+str(overallrollenemy)+".")
         time.sleep(1)
@@ -583,9 +580,9 @@ def combat():
         time.sleep(1)
         enemyrollforcombat = random.randint(1,20)
         overallrollenemy = enemyrollforcombat + normal_enemy['speed']//3
-        print("The monster rolled a "+str(plyrrollforcombat)+".")
+        print("The monster rolled a "+str(enemyrollforcombat)+".")
         time.sleep(1)
-        print("With their +"+str(plyrstats['speed']//3)+" means that they got a "+str(overallrollplyr)+".")
+        print("With their +"+str(normal_enemy['speed']//3)+" means that they got a "+str(overallrollenemy)+".")
         time.sleep(1)
         if overallrollenemy > overallrollplyr:
             enemygoesfirst = True
@@ -619,6 +616,8 @@ def combat():
                 return 'playerdead'
             elif resultsofplyrturn == 'exitcombat':
                 return 'exitcombat'
+            elif resultsofplyrturn == 'theywon':
+                return 'theywon'
             elif resultsofplyrturn == 'playernotdead':
                 resultsofmonsterturn = monsterturn()
                 if resultsofmonsterturn == 'enemydead':
@@ -827,6 +826,7 @@ def main():
             pass
         while True:
             print("\n")
+
             roomtomoveto = input("What room do you want to move to?(Use only the number of the room)")
             if current_room == "room1":
                 if int(roomtomoveto) in room1['room_accesses']:
