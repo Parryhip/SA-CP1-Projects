@@ -397,7 +397,7 @@ def monsterturn():
             print("The monster hits you for "+overall_attack+".")
             plyrstats['hp'] -= int(overall_attack)
             time.sleep(0.5)
-            print("Your hp is now "+str(plyrstats['hp'] +"."))
+            print("Your hp is now "+str(plyrstats['hp']) +".")
             time.sleep(0.5)
             if plyrstats['hp'] <= 0:
                 print("Sadly, you have died.")
