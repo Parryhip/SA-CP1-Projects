@@ -124,7 +124,7 @@ def play_again():
             continue
 def plyrturn():
     while True:
-        plyraction = input("What do you want to do? 1 for attack with sword, 2 for cast spell, 3 for use potion, 4 for switch weapon, and 5 for run away.")
+        plyraction = input("What do you want to do? 1 for attack with sword, 2 for use potion, 3 for cast spell, 4 for switch weapon, and 5 for run away.")
         if plyraction == "1":
             print("You attack with your sword.")
             time.sleep(1)
@@ -250,7 +250,7 @@ def plyrturn():
                             plyrstats['strength'] -= 4
                         elif plyrstats['weaponcurrentlyequipped'] == "dagger":
                             plyrstats['strength'] -= 2
-                        plyrstats['weaponcurrentlyequipped'] = "shortsword"
+                        plyrstats['weaponcurrentlyequipped'] = "dagger"
                         plyrstats['strength'] += 2
                 elif weapontoequip == "exit":
                     break
@@ -379,6 +379,12 @@ def monsterturn():
                     else:
                         print("You successfully blocked the monster!")
                         return "playernotdead"
+                elif plyrwantstoblock.lower() == "n":
+                    print("The monster gets away.")
+                    return "exitcombat"
+                else:
+                    print("While you were considering your grammar usage, the monster got away.")
+                    return "exitcombat"
             else:
                 pass
         else:
@@ -406,6 +412,7 @@ def monsterturn():
                 print("Your turn!")
                 return 'playernotdead'
 def loot():
+    normal_enemy['hp'] = 30
     if current_room == "room1":
         chestrarity = random.randint(1,100)
         roomlootprobcommon = room1['common_chest_prob']
@@ -568,9 +575,13 @@ def combat():
         if overallrollenemy > overallrollplyr:
             enemygoesfirst = True
             plyrgoesfirst = False
-        elif overallrollenemy > overallrollplyr:
+        elif overallrollenemy < overallrollplyr:
             enemygoesfirst = False
             plyrgoesfirst = True
+        else:
+            enemygoesfirst = True
+            plyrgoesfirst = False
+
     else:
         plyrrollforcombat = random.randint(1,20)
         overallrollplyr = plyrrollforcombat + plyrstats['speed']//3
